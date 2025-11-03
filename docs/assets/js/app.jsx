@@ -48,9 +48,9 @@ function Projects(){
               {(p.tags || []).map((t, j) => <span className="tag" key={j}>{t}</span>)}
             </div>
             <p style={{marginTop:12}}>
-              {p.link && p.link !== '#' ? <a href={p.link} target="_blank" rel="noopener">Live</a> : null}
+              {p.link && p.link !== '#' ? <a href={p.link} target="_blank" rel="noopener">Web Link</a> : null}
               {' '}
-              {p.repo ? <a href={p.repo} target="_blank" rel="noopener">Repo</a> : null}
+              {p.repo ? <a href={p.repo} target="_blank" rel="noopener">Github Repository</a> : null}
             </p>
           </article>
         ))}
@@ -91,7 +91,7 @@ function Contact(){
 function Footer(){
   return (
     <footer className="site-footer">
-      <div className="container">© {new Date().getFullYear()}Joseph Cin — Built with Passion</div>
+      <div className="container">© {new Date().getFullYear()} Joseph Cin — Built with Passion</div>
     </footer>
   );
 }
