@@ -4,7 +4,7 @@ function Header(){
   return (
     <header className="site-header">
       <div className="container">
-        <h1 className="brand">Your Name</h1>
+        <h1 className="brand">Joseph Cin</h1>
         <nav>
           <a href="#projects">Projects</a>
           <a href="#about">About</a>
@@ -63,7 +63,8 @@ function About(){
   return (
     <section id="about" className="container">
       <h2>About me</h2>
-      <p>Brief bio goes here. Mention your skills like Python, SQL, machine learning, visualization, and the type of data work you enjoy.</p>
+      <p>I am an inspiring Data Analyst who is passionate about turning data into meaningful insights.
+         I have an interest in reading novels like "Lord of the Mysteries" and learning to cook in my free time.</p>
     </section>
   );
 }
@@ -73,7 +74,6 @@ function Resume(){
     <section id="resume" className="container">
       <h2>Resume</h2>
       <p>Download my resume: <a href="assets/resume.pdf" id="resume-link">Resume (PDF)</a></p>
-      <p>If you don't have a PDF yet, add one at <code>docs/assets/resume.pdf</code> and this link will work.</p>
     </section>
   );
 }
@@ -82,8 +82,8 @@ function Contact(){
   return (
     <section id="contact" className="container">
       <h2>Contact</h2>
-      <p>Email: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
-      <p>GitHub: <a href="https://github.com/USERNAME" target="_blank" rel="noopener">@USERNAME</a></p>
+      <p>Email: <a href="mailto:your.email@example.com">josephpauliancin@icloud.com</a></p>
+      <p>GitHub: <a href="https://github.com/USERNAME" target="_blank" rel="noopener">@JosephCin1</a></p>
     </section>
   );
 }
@@ -91,7 +91,7 @@ function Contact(){
 function Footer(){
   return (
     <footer className="site-footer">
-      <div className="container">© {new Date().getFullYear()} Your Name — Built with React (CDN)</div>
+      <div className="container">© {new Date().getFullYear()}Joseph Cin — Built with Passion</div>
     </footer>
   );
 }
@@ -103,7 +103,8 @@ function App(){
       <main>
         <section className="hero container">
           <h2>Data projects, analysis, and models</h2>
-          <p>Welcome! I'm a data scientist/analyst — explore my projects below.</p>
+          <p>Welcome!</p>
+          <p>Here are my projects below!</p>
         </section>
         <Projects />
         <About />

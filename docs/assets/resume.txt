@@ -1,7 +1,0 @@
-Placeholder for resume.
-
-To include your PDF resume in the site, place a file named `resume.pdf` at:
-
-  docs/assets/resume.pdf
-
-Then the Resume link on the site will download it. GitHub Pages serves files from `docs/` automatically when configured in repository settings (or choose the `docs` folder in Pages source).
