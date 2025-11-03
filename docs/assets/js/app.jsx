@@ -83,7 +83,7 @@ function Contact(){
     <section id="contact" className="container">
       <h2>Contact</h2>
       <p>Email: <a href="mailto:your.email@example.com">josephpauliancin@icloud.com</a></p>
-      <p>GitHub: <a href="https://github.com/USERNAME" target="_blank" rel="noopener">@JosephCin1</a></p>
+      <p>GitHub: <a href="https://github.com/JosephCin1" target="_blank" rel="noopener">@JosephCin1</a></p>
     </section>
   );
 }
