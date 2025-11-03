@@ -1,18 +1,18 @@
 {
   "projects": [
     {
-      "title": "Sales Forecasting",
-      "description": "Built a sales forecasting pipeline using Prophet and XGBoost. Includes cleaning, feature engineering, backtesting, and a Streamlit dashboard.",
-      "link": "#",
-      "repo": "https://github.com/USERNAME/sales-forecasting",
-      "tags": ["Python", "Time Series", "Prophet", "XGBoost"]
+      "title": "Penny Stock Prediction",
+      "description": "Analytical report of my penny stock prediction model using historical price data and machine learning techniques.",
+      "link": "https://medium.com/@jcin/predicting-penny-stock-surges-b9581c1a5978",
+      "repo": "https://github.com/JosephCin1/INST-414-Final-Project---Predicting-Penny-Stock-Surge",
+      "tags": ["Python", "Machine Learning", "Pandas", "Scikit-Learn"]
     },
     {
-      "title": "Customer Segmentation",
-      "description": "K-means clustering on RFM features, cluster profiling, and visualization with Plotly and Tableau public.",
-      "link": "#",
-      "repo": "https://github.com/USERNAME/customer-segmentation",
-      "tags": ["Clustering", "EDA", "SQL"]
+      "title": "Travel Planner Website",
+      "description": "Created a website that uses APIs to help users plan their trips with activities.",
+      "link": "https://new-travel-guide-inst-377-project.vercel.app/",
+      "repo": "https://github.com/JosephCin1/-NEW-Travel-Guide-INST377-Project",
+      "tags": ["JavaScript", "APIs", "HTML", "CSS", "React"]
     }
   ]
 }
