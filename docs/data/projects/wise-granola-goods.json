@@ -1,0 +1,157 @@
+{
+  "title": "WISE GRANOLA GOODS",
+  "subtitle": "Building the online storefront for my own granola business in San Diego — one-time orders and box subscriptions, all running on Square and shaped around a real weekly bake schedule.",
+  "meta": [
+    {
+      "label": "Type",
+      "value": "Small-business web app"
+    },
+    {
+      "label": "Stack",
+      "value": "Square APIs & SDK, Square Subscriptions"
+    },
+    {
+      "label": "Status",
+      "value": "In progress — Square sandbox"
+    },
+    {
+      "label": "Role",
+      "value": "Owner & developer"
+    }
+  ],
+  "stats": [
+    {
+      "value": "3",
+      "label": "weekly farmers-market pickups"
+    },
+    {
+      "value": "40%",
+      "label": "target net margin, regular products"
+    },
+    {
+      "value": "~35%",
+      "label": "margin floor on subscription deals"
+    },
+    {
+      "value": "$1–2",
+      "label": "max retail price increase"
+    }
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "title": "The problem",
+      "body": [
+        "WISE GRANOLA GOODS sells at San Diego farmers markets and through local delivery. I wanted customers to be able to order ahead or subscribe online, with prices that still work for the business.",
+        "So the site isn't just a storefront: the product rules, pricing, and order cutoffs all come from how the business actually runs each week."
+      ]
+    },
+    {
+      "type": "week",
+      "title": "The weekly cycle the site is built around",
+      "caption": "Ordering closes before ingredients are bought, so every batch is baked to real demand.",
+      "days": [
+        {
+          "day": "Mon",
+          "events": [
+            "Orders close 6 AM PT",
+            "Buy ingredients"
+          ]
+        },
+        {
+          "day": "Tue",
+          "events": [
+            "Bake"
+          ]
+        },
+        {
+          "day": "Wed",
+          "events": [
+            "Market Wednesday, 3–7 PM"
+          ]
+        },
+        {
+          "day": "Thu",
+          "events": [
+            "Market Thursday, 3–7 PM"
+          ]
+        },
+        {
+          "day": "Fri",
+          "events": [
+            "La Mesa Village Farmers Market, 3–7 PM"
+          ]
+        },
+        {
+          "day": "Sat",
+          "events": []
+        },
+        {
+          "day": "Sun",
+          "events": []
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "title": "Pickup locations",
+      "columns": [
+        "Market",
+        "Day",
+        "Hours"
+      ],
+      "rows": [
+        [
+          "Market Wednesday",
+          "Wednesday",
+          "3–7 PM"
+        ],
+        [
+          "Market Thursday",
+          "Thursday",
+          "3–7 PM"
+        ],
+        [
+          "La Mesa Village Farmers Market (La Mesa Blvd, 4th St–Palm Ave)",
+          "Friday",
+          "3–7 PM"
+        ]
+      ]
+    },
+    {
+      "type": "bar",
+      "title": "Margin targets by channel",
+      "caption": "Subscriptions trade a few points of margin for predictable weekly volume.",
+      "format": "pct0",
+      "max": 50,
+      "showValues": true,
+      "data": [
+        {
+          "label": "Regular products",
+          "value": 40
+        },
+        {
+          "label": "Subscription boxes",
+          "value": 35
+        }
+      ]
+    },
+    {
+      "type": "list",
+      "title": "Business rules I encoded",
+      "items": [
+        "Fixed-price box subscriptions through Square Subscriptions, covering both pickup and delivery.",
+        "Two cadences only — every 2 weeks or monthly — to keep baking predictable.",
+        "Volume discounts with a minimum order, priced so retail increases stay within $1–2.",
+        "No commercial-kitchen rent in the cost model, which is what keeps the 40% target realistic.",
+        "Orders not picked up within 2 weeks are discarded and still charged.",
+        "Glass jars and refills stay in-person only at the market."
+      ]
+    },
+    {
+      "type": "callout",
+      "title": "Why it's in a data portfolio",
+      "body": "Every price on the site comes out of a cost-and-margin model, and the order cutoff exists so purchasing matches demand. It's the same thinking as an analytics project — just with my own money on the line."
+    }
+  ]
+}

@@ -1,0 +1,361 @@
+{
+  "title": "Predicting Penny Stock Surges",
+  "subtitle": "Can a year of price and volume data tell you a penny stock is about to run? I built the pipeline to find out — and the honest answer was \"not on its own.\"",
+  "meta": [
+    {
+      "label": "Type",
+      "value": "Data analysis · ML"
+    },
+    {
+      "label": "Data window",
+      "value": "May 20, 2024 – May 16, 2025"
+    },
+    {
+      "label": "Stack",
+      "value": "Python, Pandas, scikit-learn, Matplotlib"
+    },
+    {
+      "label": "Context",
+      "value": "UMD INST 414 final project"
+    }
+  ],
+  "stats": [
+    {
+      "value": "41",
+      "label": "tickers collected"
+    },
+    {
+      "value": "10,102",
+      "label": "daily price rows"
+    },
+    {
+      "value": "10",
+      "label": "engineered model features"
+    },
+    {
+      "value": "1,270",
+      "label": "held-out test rows"
+    }
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "title": "The question",
+      "body": [
+        "Penny stocks are famous for sudden runs. I wanted to know whether those runs leave a footprint in the weeks before they happen — in volatility, volume, or price behavior — that a simple model could learn.",
+        "I pulled a year of daily OHLCV data for 41 low-priced, high-attention tickers (plus a few steadier names like AEP for contrast), cleaned it into one pipeline, and defined a \"surge window\" as the 50 trading days leading up to each stock's yearly high."
+      ]
+    },
+    {
+      "type": "funnel",
+      "title": "From raw files to a modeling set",
+      "caption": "Every stage that removed data, and why.",
+      "steps": [
+        {
+          "label": "CSV files collected",
+          "value": 41,
+          "note": "One per ticker, ~249 trading days each"
+        },
+        {
+          "label": "Feature-engineered",
+          "value": 40,
+          "note": "MULN dropped: comma-formatted prices broke parsing"
+        },
+        {
+          "label": "Kept for modeling",
+          "value": 27,
+          "note": "Needed ≥ 20 days inside the surge window"
+        }
+      ]
+    },
+    {
+      "type": "diverging",
+      "title": "How the year actually went",
+      "caption": "Change in closing price, first to last trading day. 28 of 40 tickers finished lower.",
+      "unit": "%",
+      "format": "pct1",
+      "note": "Prices are unadjusted, so reverse splits make the biggest losses look even steeper than they were.",
+      "data": [
+        {
+          "label": "TMC",
+          "value": 154.5
+        },
+        {
+          "label": "BBAI",
+          "value": 129.4
+        },
+        {
+          "label": "NGD",
+          "value": 79.5
+        },
+        {
+          "label": "GTEC",
+          "value": 44.9
+        },
+        {
+          "label": "TVGN",
+          "value": 44.9
+        },
+        {
+          "label": "PRZO",
+          "value": 30.1
+        },
+        {
+          "label": "HIMX",
+          "value": 23.7
+        },
+        {
+          "label": "WISE",
+          "value": 15.3
+        },
+        {
+          "label": "AEP",
+          "value": 11.3
+        },
+        {
+          "label": "BLDE",
+          "value": 7.3
+        },
+        {
+          "label": "CAF",
+          "value": 5.5
+        },
+        {
+          "label": "GLGI",
+          "value": 3.4
+        },
+        {
+          "label": "ARBE",
+          "value": 0.0
+        },
+        {
+          "label": "IMRX",
+          "value": -2.0
+        },
+        {
+          "label": "LODE",
+          "value": -8.0
+        },
+        {
+          "label": "EVC",
+          "value": -8.5
+        },
+        {
+          "label": "ENTX",
+          "value": -11.7
+        },
+        {
+          "label": "CRON",
+          "value": -23.0
+        },
+        {
+          "label": "LAC",
+          "value": -35.5
+        },
+        {
+          "label": "NAT",
+          "value": -35.8
+        },
+        {
+          "label": "MDXXF",
+          "value": -37.5
+        },
+        {
+          "label": "APEUF",
+          "value": -47.1
+        },
+        {
+          "label": "SIDU",
+          "value": -49.8
+        },
+        {
+          "label": "GRUSF",
+          "value": -51.9
+        },
+        {
+          "label": "ADIL",
+          "value": -56.0
+        },
+        {
+          "label": "OPTX",
+          "value": -56.8
+        },
+        {
+          "label": "IAUX",
+          "value": -60.2
+        },
+        {
+          "label": "DTSS",
+          "value": -61.3
+        },
+        {
+          "label": "SMSI",
+          "value": -68.3
+        },
+        {
+          "label": "TLRY",
+          "value": -74.2
+        },
+        {
+          "label": "PLUG",
+          "value": -75.9
+        },
+        {
+          "label": "FOXO",
+          "value": -78.2
+        },
+        {
+          "label": "BDSX",
+          "value": -80.9
+        },
+        {
+          "label": "RANI",
+          "value": -87.8
+        },
+        {
+          "label": "XTKG",
+          "value": -91.2
+        },
+        {
+          "label": "TNXP",
+          "value": -95.4
+        },
+        {
+          "label": "ZCAR",
+          "value": -97.2
+        },
+        {
+          "label": "JAGX",
+          "value": -97.7
+        },
+        {
+          "label": "APDN",
+          "value": -99.3
+        },
+        {
+          "label": "CERO",
+          "value": -99.4
+        }
+      ]
+    },
+    {
+      "type": "stats",
+      "title": "Timing between the low and the high",
+      "items": [
+        {
+          "value": "94 days",
+          "label": "mean gap between yearly low and yearly high"
+        },
+        {
+          "value": "56.5 days",
+          "label": "median gap — a few long gaps pull the mean up"
+        }
+      ]
+    },
+    {
+      "type": "bar",
+      "title": "Stocks that behave like the biggest movers",
+      "caption": "Cosine similarity of standardized feature profiles between each top mover and its closest match (1.0 = identical profile).",
+      "format": "dec2",
+      "max": 1,
+      "showValues": true,
+      "data": [
+        {
+          "label": "APDN ↔ ZCAR",
+          "value": 0.92
+        },
+        {
+          "label": "LODE ↔ PRZO",
+          "value": 0.88
+        },
+        {
+          "label": "FOXO ↔ MDXXF",
+          "value": 0.85
+        },
+        {
+          "label": "TVGN ↔ PRZO",
+          "value": 0.81
+        },
+        {
+          "label": "BBAI ↔ PLUG",
+          "value": 0.77
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "title": "The model",
+      "body": [
+        "I added rolling features (5- and 10-day moving averages, volatility, volume averages and change, daily range, close/open ratio) and trained a depth-5 decision tree with balanced class weights. The split was chronological — no shuffling — so the model never peeks at the future."
+      ]
+    },
+    {
+      "type": "confusion",
+      "title": "Results on the held-out period",
+      "caption": "Rows are what actually happened; columns are what the model predicted.",
+      "labels": [
+        "No surge",
+        "Surge"
+      ],
+      "matrix": [
+        [
+          616,
+          404
+        ],
+        [
+          191,
+          59
+        ]
+      ]
+    },
+    {
+      "type": "table",
+      "title": "Per-class scores",
+      "columns": [
+        "Class",
+        "Precision",
+        "Recall",
+        "F1",
+        "Support"
+      ],
+      "rows": [
+        [
+          "No surge",
+          "0.76",
+          "0.60",
+          "0.67",
+          "1,020"
+        ],
+        [
+          "Surge",
+          "0.13",
+          "0.24",
+          "0.17",
+          "250"
+        ],
+        [
+          "Overall accuracy",
+          "",
+          "",
+          "0.53",
+          "1,270"
+        ]
+      ]
+    },
+    {
+      "type": "callout",
+      "title": "What I took away",
+      "body": "Price and volume alone barely beat a coin flip at spotting surges — the model caught about 1 in 4 real surge days, and most of its surge calls were false alarms. That's a useful negative result: whatever drives these runs (news, social hype, filings) mostly isn't in the price history yet."
+    },
+    {
+      "type": "list",
+      "title": "What I'd do next",
+      "items": [
+        "Use split-adjusted prices so reverse splits stop distorting returns and drawdowns.",
+        "Add the Reddit (r/pennystocks) and news-sentiment signals as features, timed before each surge.",
+        "Validate per ticker with walk-forward splits instead of one global cutoff.",
+        "Try models that handle imbalance better (gradient boosting, threshold tuning) and report precision-recall curves."
+      ]
+    }
+  ]
+}

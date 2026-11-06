@@ -1,0 +1,81 @@
+{
+  "title": "AI Travel Guide",
+  "subtitle": "A recommendation app for new cities: Gemini suggests places, and a scoring model I wrote decides which ones actually fit you.",
+  "meta": [
+    { "label": "Type", "value": "Full-stack web app" },
+    { "label": "Stack", "value": "React, Vite, Supabase, Gemini, Google Maps" },
+    { "label": "Context", "value": "UMD INST 377 final project" }
+  ],
+  "stats": [
+    { "value": "10", "label": "preference dimensions" },
+    { "value": "4", "label": "external services integrated" },
+    { "value": "≤10", "label": "AI suggestions per search" },
+    { "value": "4", "label": "Supabase tables" }
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "title": "The idea",
+      "body": [
+        "Most travel apps rank places by popularity. I wanted results ranked by fit: someone who loves quiet outdoor spots and someone who wants nightlife shouldn't see the same list.",
+        "Users rate themselves 1–10 on ten dimensions. Each search asks Gemini for places in the destination along with ratings on those same ten dimensions, and the app scores every place against the user's profile."
+      ]
+    },
+    {
+      "type": "steps",
+      "title": "What happens on a search",
+      "items": [
+        { "title": "Log the search", "body": "Destination and the user's current preferences are written to user_searches." },
+        { "title": "Ask Gemini", "body": "A structured prompt returns up to 10 places, each with a 1–10 rating per category." },
+        { "title": "Resolve against the database", "body": "Each place is matched to points_of_interest by name and city — reused if it exists, inserted if new." },
+        { "title": "Score the fit", "body": "The weighted match score (below) ranks every place for this user." },
+        { "title": "Save and map", "body": "Matches are upserted to the matches table and plotted on the map." }
+      ]
+    },
+    {
+      "type": "matchScore",
+      "title": "Try the match score",
+      "caption": "This is the scoring formula from the app, running live. Move your preferences and watch how each example place re-ranks.",
+      "categories": ["outdoor", "activity_intensity", "cultural", "social", "budget", "local_flavor", "touristy", "indoor", "eventful", "romantic"],
+      "defaults": { "outdoor": 8, "activity_intensity": 6, "cultural": 5, "social": 4, "budget": 7, "local_flavor": 9, "touristy": 2, "indoor": 3, "eventful": 4, "romantic": 5 },
+      "places": [
+        { "name": "Hillside hiking trail", "ratings": { "outdoor": 10, "activity_intensity": 8, "cultural": 2, "social": 3, "budget": 9, "local_flavor": 5, "touristy": 4, "indoor": 1, "eventful": 2, "romantic": 6 } },
+        { "name": "Neighborhood night market", "ratings": { "outdoor": 7, "activity_intensity": 3, "cultural": 7, "social": 8, "budget": 8, "local_flavor": 10, "touristy": 5, "indoor": 2, "eventful": 8, "romantic": 5 } },
+        { "name": "Art museum", "ratings": { "outdoor": 1, "activity_intensity": 2, "cultural": 10, "social": 4, "budget": 5, "local_flavor": 6, "touristy": 7, "indoor": 10, "eventful": 4, "romantic": 6 } },
+        { "name": "Rooftop cocktail bar", "ratings": { "outdoor": 5, "activity_intensity": 1, "cultural": 3, "social": 9, "budget": 2, "local_flavor": 4, "touristy": 6, "indoor": 5, "eventful": 7, "romantic": 9 } }
+      ],
+      "note": "Example places and ratings are illustrative; in the app they come from Gemini per search."
+    },
+    {
+      "type": "formula",
+      "title": "How the score works",
+      "lines": [
+        "similarity(c) = 9 − |you(c) − place(c)|",
+        "score = Σ similarity(c) × you(c) ÷ Σ 9 × you(c) × 100"
+      ],
+      "body": "Each category is weighted by how much you care about it, so a mismatch on something you rated 9 costs far more than one you rated 2."
+    },
+    {
+      "type": "bar",
+      "title": "Where the code lives",
+      "caption": "Lines of JavaScript/JSX by layer in src/.",
+      "format": "int",
+      "showValues": true,
+      "data": [
+        { "label": "Pages (9 files)", "value": 1006 },
+        { "label": "API layer (7 files)", "value": 633 },
+        { "label": "Shared components (3 files)", "value": 180 }
+      ]
+    },
+    {
+      "type": "list",
+      "title": "Integrations",
+      "items": [
+        "Supabase (Postgres) — users, searches, places, and matches, with upserts keyed on search and place.",
+        "Google Gemini — structured JSON recommendations, with cleanup for markdown-wrapped responses.",
+        "Google Maps / Places — map rendering and place lookup.",
+        "OpenCage — geocoding destinations into coordinates."
+      ]
+    }
+  ]
+}
