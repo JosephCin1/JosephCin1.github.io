@@ -51,7 +51,7 @@
     return (
       <header className="site-header">
         <div className="container header-inner">
-          <a className="brand" href="#/">{site.brand || site.name}</a>
+          {site.brand ? <a className="brand" href="#/">{site.brand}</a> : <span />}
           <nav aria-label="Main">
             <a href="#/projects">Projects</a>
             <a href="#/about">About</a>
